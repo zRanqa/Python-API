@@ -19,8 +19,6 @@ class CaravanPark:
         self.hasBasketballCourt = rng.choice([True, False])
         self.hasPlayground = rng.choice([True, False])
 
-        
-        self.isMumCool = rng.choice([True, False])
 
     def to_dict(self):
         return {
@@ -35,6 +33,5 @@ class CaravanPark:
             'lakeside': self.lakeside,
             'hasTennisCourt': self.hasTennisCourt,
             'hasBasketballCourt': self.hasBasketballCourt,
-            'hasPlayground': self.hasPlayground,
-            'isMumCool': self.isMumCool
+            'hasPlayground': self.hasPlayground
         }
