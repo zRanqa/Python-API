@@ -1,8 +1,5 @@
 from flask import Flask, request
-import json
-from caravan_park import CaravanPark
 import utils
-import random
 
 app = Flask(__name__)
 
