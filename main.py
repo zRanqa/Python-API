@@ -1,6 +1,7 @@
 from flask import Flask
 import json
 from caravan_park import CaravanPark
+from utils import getDescFromName
 import random
 
 app = Flask(__name__)
@@ -43,14 +44,18 @@ def getCaravanParks():
 @app.route('/caravan-parks/filters/')
 def getFilter():
     caravanParkList = getAllCaravanParks()
+    if len(caravanParkList) == 0:
+        return {"data": []}
     filtersDict = caravanParkList[0].to_dict()
     filtersDict.pop("name")
     filtersDict.pop("contact")
     filtersDict.pop("lat")
     filtersDict.pop("long")
     filters = list(filtersDict.keys())
-    print(filters)
-    return {"data": filters}
+    filterDesc = []
+    for filter in filters:
+        filterDesc.append({"name": filter, "desc": getDescFromName(filter)})
+    return {"data": filterDesc}
 
 @app.route('/caravan-parks/<filter>/')
 def getCaravanParksByFilter(filter):
