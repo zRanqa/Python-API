@@ -1,49 +1,38 @@
-from flask import Flask
+from flask import Flask, request
 import json
 from caravan_park import CaravanPark
-from utils import getDescFromName
+import utils
 import random
 
 app = Flask(__name__)
 
-def getJSON():
-    file = open("caravan_park_data.json")
-    data = json.load(file)
-    return data
-
-def getAllCaravanParks() -> list[CaravanPark]:
-    data = getJSON()
-    caravanParkList = []
-
-    randSeed = 10
-    rng = random.Random(randSeed)
-
-    for park in data:
-        newCaravan = CaravanPark(park["name"], park["contact"], park["lat"], park["long"], rng)
-        caravanParkList.append(newCaravan)
-
-    return caravanParkList
-
-def getDict(caravanParkList: list[CaravanPark]):
-    newList = []
-    for caravanPark in caravanParkList:
-        newList.append(caravanPark.to_dict())
-    return newList
 
 @app.route('/')
 def index():
     return "hello!"
 
-@app.route('/caravan-parks/')
+# TRY: /caravan-parks?isDogFriendly=true&hasEnsuiteSites=true
+@app.route('/caravan-parks')
 def getCaravanParks():
-    caravanParkList = getAllCaravanParks()
+    query_params = request.args
+    print(query_params)
 
-    output = getDict(caravanParkList)
-    return {"data" : output}
+    caravanParkList = utils.getAllCaravanParks()
+    filteredParks = []
+    for caravanPark in caravanParkList:
+        ignorePark = False
+        for key,value in query_params.items():
+            if not (hasattr(caravanPark, key) and getattr(caravanPark, key)) and value.lower() == "true":
+                ignorePark = True
+                break
+        if not ignorePark:
+            filteredParks.append(caravanPark)
+
+    return {"data" : utils.getDict(filteredParks)}
 
 @app.route('/caravan-parks/filters/')
 def getFilter():
-    caravanParkList = getAllCaravanParks()
+    caravanParkList = utils.getAllCaravanParks()
     if len(caravanParkList) == 0:
         return {"data": []}
     filtersDict = caravanParkList[0].to_dict()
@@ -54,17 +43,17 @@ def getFilter():
     filters = list(filtersDict.keys())
     filterDesc = []
     for filter in filters:
-        filterDesc.append({"name": filter, "desc": getDescFromName(filter)})
+        filterDesc.append({"name": filter, "desc": utils.getDescFromName(filter)})
     return {"data": filterDesc}
 
-@app.route('/caravan-parks/<filter>/')
-def getCaravanParksByFilter(filter):
-    caravanParkList = getAllCaravanParks()
-    filteredParks = []
-    for park in caravanParkList:
-        if hasattr(park, filter) and getattr(park, filter):
-            filteredParks.append(park.to_dict())
-    return {"data": filteredParks}
+# @app.route('/caravan-parks')
+# def getCaravanParksByFilter(filter):
+#     caravanParkList = utils.getAllCaravanParks()
+#     filteredParks = []
+#     for park in caravanParkList:
+#         if hasattr(park, filter) and getattr(park, filter):
+#             filteredParks.append(park.to_dict())
+#     return {"data": filteredParks}
 
 
 if __name__ == '__main__':
