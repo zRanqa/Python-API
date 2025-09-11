@@ -12,7 +12,7 @@ def index():
     return "hello!"
 
 # TRY: /caravan-parks?isDogFriendly=true&hasEnsuiteSites=true
-@app.route('/caravan-parks')
+@app.route('/caravan-parks/')
 def getCaravanParks():
     query_params = request.args
     print(query_params)
@@ -45,15 +45,6 @@ def getFilter():
     for filter in filters:
         filterDesc.append({"name": filter, "desc": utils.getDescFromName(filter)})
     return {"data": filterDesc}
-
-# @app.route('/caravan-parks')
-# def getCaravanParksByFilter(filter):
-#     caravanParkList = utils.getAllCaravanParks()
-#     filteredParks = []
-#     for park in caravanParkList:
-#         if hasattr(park, filter) and getattr(park, filter):
-#             filteredParks.append(park.to_dict())
-#     return {"data": filteredParks}
 
 
 if __name__ == '__main__':
