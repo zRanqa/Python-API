@@ -24,7 +24,7 @@ def getCaravanParks():
         if not ignorePark:
             filteredParks.append(caravanPark)
 
-    return {"data" : utils.getDict(filteredParks)}
+    return utils.getDict(filteredParks)
 
 @app.route('/caravan-parks/filters/')
 def getFilter():
@@ -40,7 +40,7 @@ def getFilter():
     filterDesc = []
     for filter in filters:
         filterDesc.append({"name": filter, "desc": utils.getDescFromName(filter)})
-    return {"data": filterDesc}
+    return filterDesc
 
 
 if __name__ == '__main__':

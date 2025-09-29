@@ -16,5 +16,5 @@ python3 app.py
 TROUBLESHOOTING LINUX SERVER:
 gunicorn (mainFileName):(flaskAppNameInFile)
 
-caddy stop
+sudo caddy stop
 sudo caddy start
