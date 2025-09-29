@@ -1,0 +1,4 @@
+TO RUN:
+
+gunicorn (mainFileName):(flaskAppNameInFile)
+gunicorn app:app
