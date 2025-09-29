@@ -1,4 +1,12 @@
 TO RUN:
 
+TROUBLESHOOTING:
 gunicorn (mainFileName):(flaskAppNameInFile)
+
+caddy stop
+sudo caddy start
+
+RUNNING
+sudo caddy stop
+sudo caddy start
 gunicorn app:app

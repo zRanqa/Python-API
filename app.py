@@ -12,7 +12,6 @@ def index():
 @app.route('/caravan-parks/')
 def getCaravanParks():
     query_params = request.args
-    print(query_params)
 
     caravanParkList = utils.getAllCaravanParks()
     filteredParks = []
