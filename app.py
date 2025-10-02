@@ -42,7 +42,7 @@ def getFilter():
     filters = list(filtersDict.keys())
     filterDesc = []
     for filter in filters:
-        filterDesc.append({"name": filter, "desc": utils.getDescFromName(filter)})
+        filterDesc.append({"name": filter, "desc": utils.getDescFromName(filter), "appleImage": utils.filterNameToAppleImageName(filter)})
     return filterDesc
 
 

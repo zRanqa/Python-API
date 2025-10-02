@@ -14,7 +14,7 @@ def getAllCaravanParks() -> list[CaravanPark]:
 
     randSeed = 10
     rng = random.Random(randSeed)
-    
+
     for park in data:
         newCaravan = CaravanPark(park["name"], park["contact"], park["lat"], park["long"], rng)
         caravanParkList.append(newCaravan)
@@ -33,19 +33,35 @@ def getDescFromName(name):
     match name:
         case "isDogFriendly":
             return "Dog Friendly"
-        case 'hasEnsuiteSites':
-            return "Ensuite"
-        case 'hasPoweredSites':
-            return "Powered"
-        case 'hasCabins':
-            return "Cabins"
-        case 'lakeside':
-            return "Lakeside"
+        case 'hasEnsuites':
+            return "Ensuites"
         case 'hasTennisCourt':
             return "Tennis Court"
         case 'hasBasketballCourt':
             return "Basketball Court"
-        case 'hasPlayground': 
-            return "Playground"
+        case 'hasSwimmingPool':
+            return "Swimming Pool"
+        case 'hasFreeWifi': 
+            return "Free Wifi"
     
     return ""
+
+
+def filterNameToAppleImageName(name):
+    
+    match name:
+        case "isDogFriendly":
+            return "dog.circle"
+        case "hasEnsuites":
+            return "house.circle"
+        case "hasBasketballCourt":
+            return "basketball.circle"
+        case "hasSwimmingPool":
+            return "figure.pool.swim.circle"
+        case "hasTennisCourt":
+            return "tennis.racket.circle"
+        case "hasFreeWifi":
+            return "wifi.circle"
+        
+    return ""
+    

@@ -2,7 +2,7 @@ import random
 import json
 
 class CaravanPark:
-    def __init__(self, name, contact, lat, long, rng):
+    def __init__(self, name, contact, lat, long, rng: random.Random):
         self.name = name
         self.contact = contact
         self.lat = lat
@@ -13,15 +13,13 @@ class CaravanPark:
         self.rating = rng.randint(5,50) / 10
         
         self.isDogFriendly = rng.choice([True, False])
-        self.hasEnsuiteSites = rng.choice([True, False])
-        self.hasPoweredSites = rng.choice([True, False])
-        self.hasCabins = rng.choice([True, False])
+        self.hasEnsuites = rng.choice([True, False])
 
-        self.lakeside = rng.choice([True, False])
+        self.hasFreeWifi = rng.choice([True, False])
 
         self.hasTennisCourt = rng.choice([True, False])
         self.hasBasketballCourt = rng.choice([True, False])
-        self.hasPlayground = rng.choice([True, False])
+        self.hasSwimmingPool = rng.choice([True, False])
 
 
     def to_dict(self):
@@ -34,11 +32,9 @@ class CaravanPark:
             'cost': self.cost,
             'rating': self.rating,
             'isDogFriendly': self.isDogFriendly,
-            'hasEnsuiteSites': self.hasEnsuiteSites,
-            'hasPoweredSites': self.hasPoweredSites,
-            'hasCabins': self.hasCabins,
-            'lakeside': self.lakeside,
+            'hasEnsuites': self.hasEnsuites,
             'hasTennisCourt': self.hasTennisCourt,
             'hasBasketballCourt': self.hasBasketballCourt,
-            'hasPlayground': self.hasPlayground
+            'hasSwimmingPool': self.hasSwimmingPool,
+            'hasFreeWifi': self.hasFreeWifi
         }
