@@ -36,6 +36,9 @@ def getFilter():
     filtersDict.pop("contact")
     filtersDict.pop("lat")
     filtersDict.pop("long")
+    filtersDict.pop("rating")
+    filtersDict.pop("cost")
+    filtersDict.pop("sites")
     filters = list(filtersDict.keys())
     filterDesc = []
     for filter in filters:

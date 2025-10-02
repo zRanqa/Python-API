@@ -14,7 +14,7 @@ def getAllCaravanParks() -> list[CaravanPark]:
 
     randSeed = 10
     rng = random.Random(randSeed)
-
+    
     for park in data:
         newCaravan = CaravanPark(park["name"], park["contact"], park["lat"], park["long"], rng)
         caravanParkList.append(newCaravan)
